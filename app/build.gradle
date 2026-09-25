@@ -1,0 +1,48 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace = 'io.github.hexstr.UnityFPSUnlocker'
+    compileSdk = 37
+
+    defaultConfig {
+        applicationId = namespace
+        minSdk = 28
+        targetSdk = 36
+        versionCode = 1
+        versionName = "1.0"
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/libs']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.3.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+    implementation 'androidx.preference:preference:1.2.1'
+    // Supplied by the Xposed framework at runtime.
+    compileOnly("io.github.libxposed:api:102.0.0")
+    // The service side supplies XposedProvider and RemotePreferences to the module app.
+    implementation("io.github.libxposed:service:102.0.0")
+}

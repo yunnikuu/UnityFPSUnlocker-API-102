@@ -1,0 +1,22 @@
+package io.github.hexstr.UnityFPSUnlocker;
+
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class PerAppSettingsActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ServiceState.register();
+        setContentView(R.layout.settings_activity);
+        SettingsInsets.apply(findViewById(R.id.settings));
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.settings, new PerAppSettingsFragment())
+                    .commit();
+        }
+    }
+}
